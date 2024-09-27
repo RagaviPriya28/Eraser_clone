@@ -4,7 +4,7 @@ import EditorJS from '@editorjs/editorjs';
 // @ts-ignore
 import Header from '@editorjs/header';
 // @ts-ignore
-import List from "@editorjs/list";
+import list from "@editorjs/list";
 // @ts-ignore
 import Checklist from '@editorjs/checklist'
 // @ts-ignore
@@ -15,6 +15,7 @@ import { useMutation } from 'convex/react';
 import { api } from '@/convex/_generated/api';
 import { toast } from 'sonner';
 import { FILE } from '../../dashboard/_components/FileList';
+import { List } from 'lucide-react';
 
 const rawDocument={
     "time" : 1550476186479,
@@ -48,38 +49,34 @@ function Editor({onSaveTrigger,fileId,fileData}:{onSaveTrigger:any,fileId:any,fi
       onSaveTrigger&&onSaveDocument();
     },[onSaveTrigger])
 
-    const initEditor=()=>{
-        const editor = new EditorJS({
-            /**
-             * Id of Element that should contain Editor instance
-             */
-
-            tools:{
-                header: {
-                    class: Header,
-                    shortcut: 'CMD+SHIFT+H',
-                    config:{
-                        placeholder:'Enter a Header'
-                    }
-                  },
-                  list: {
-                    inlineToolbar: true,
-                    config: {
-                      defaultStyle: 'unordered'
-                    }
-                  },
-                  checklist: {
-                    class: Checklist,
-                    inlineToolbar: true,
-                  },
-                  paragraph: Paragraph,
-                  warning: Warning,
+    const initEditor = () => {
+      const editor = new EditorJS({
+        holder: 'editorjs',
+        data: fileData?.document ? JSON.parse(fileData.document) : rawDocument,
+        tools: {
+          header: {
+            class: Header,
+            shortcut: 'CMD+SHIFT+H',
+            config: {
+              placeholder: 'Enter a Header',
             },
-            holder: 'editorjs',
-            data:fileData?.document?JSON.parse(fileData.document):rawDocument
-          });
-          ref.current=editor;
-    }
+          },
+          checklist: {
+            class: Checklist,
+            inlineToolbar: true,
+          },
+          paragraph: {
+            class: Paragraph,
+            inlineToolbar: true,
+          },
+          warning: {
+            class: Warning,
+            inlineToolbar: true,
+          },
+        },
+      });
+      ref.current = editor;
+    };
 
     const onSaveDocument=()=>{
       if(ref.current)

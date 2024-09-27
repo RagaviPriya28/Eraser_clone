@@ -63,7 +63,6 @@ function Editor({onSaveTrigger,fileId,fileData}:{onSaveTrigger:any,fileId:any,fi
                     }
                   },
                   list: {
-                    class: List,
                     inlineToolbar: true,
                     config: {
                       defaultStyle: 'unordered'

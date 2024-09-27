@@ -79,6 +79,8 @@ function FileList() {
                 
                 <DropdownMenuItem className='gap-3'> 
                   <Archive className='h-4 w-4'/> Archive</DropdownMenuItem>
+                <DropdownMenuItem className='gap-3'> 
+                  <Archive className='h-4 w-4'/> Delete</DropdownMenuItem>
                 
                 </DropdownMenuContent>
               </DropdownMenu>

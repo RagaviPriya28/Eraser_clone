@@ -16,6 +16,7 @@ import type {
   FunctionReference,
 } from "convex/server";
 import type * as file from "../file.js";
+import type * as invites from "../invites.js";
 import type * as teams from "../teams.js";
 import type * as user from "../user.js";
 
@@ -29,6 +30,7 @@ import type * as user from "../user.js";
  */
 declare const fullApi: ApiFromModules<{
   file: typeof file;
+  invites: typeof invites;
   teams: typeof teams;
   user: typeof user;
 }>;

@@ -20,3 +20,15 @@ export const createTeam=mutation({
         return result;
     },
 })
+
+export const getTeamByUser = query({
+    args: { userId: v.string() },
+    handler: async (ctx, { userId }) => {
+      const team = await ctx.db
+        .query('teams')
+        .filter((q) => q.eq(q.field('createdBy'), userId))
+        .first();
+  
+      return team; 
+    },
+  });

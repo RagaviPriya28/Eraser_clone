@@ -65,3 +65,29 @@ export const updateDocument = mutation({
         return result;
     },
 })
+
+export const deleteFile = mutation({
+    args: {
+        _id: v.id('files')
+    },
+    handler: async (ctx, args) => {
+        const result = await ctx.db.delete(args._id);
+        return { success: true, message: 'File deleted successfully' }; // Structured response
+    },
+});
+
+export const searchFiles = query({
+  args: {
+    fileName: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const {fileName } = args;
+
+    // Fetch files that match the teamId and apply a secondary filter for fileName
+    const result = await ctx.db.query("files")
+      .filter(q => q.eq(q.field("fileName"), fileName)) // Filter by file name (using startsWith)
+      .collect();
+
+    return result;
+  },
+});
